@@ -1,0 +1,52 @@
+{
+    "app_name": "WordPress",
+    "bug_id": "#11992",
+    "events": {
+        "1": {
+            "info": "Selected the \"Reader\" at the bottom navigation bar.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Selected the \"My site\" at the bottom navigation bar",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Selected the \"Blog Posts\" in \"My Site\" page.",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Selected the \"Site Pages\" in \"My Site\" page.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": "Cannot enable the \"Don't keep activities\" in setting. Should select the \"Reader\" page and enter \"Blog post\" or \"Site pages\" twice or once respectively. ",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
+            "2": "state_2",
+            "3": "state_3",
+            "4": "state_3"
+        },
+        "state_3": {
+            "1": "state_1",
+            "2": "state_3",
+            "3": "Crash!",
+            "4": "Crash!"
+        }
+    },
+    "interesting_pairs": {"1": ["2"], "2": ["3", "4"], "3": ["3", "4"], "4": ["3", "4"]}
+}

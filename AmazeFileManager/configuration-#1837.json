@@ -1,0 +1,41 @@
+{
+    "app_name": "AmazeFileManager",
+    "bug_id": "#1837",
+    "events": {
+        "1": {
+            "info": "Clicked \"Search\" button on the tool bar.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Inputted a string in the searching bar and Searched it.",
+            "reason": null,
+            "dependency": "cd:1"
+        },
+        "3": {
+            "info": "The search succeeded and multiple entries returned.",
+            "reason": null,
+            "dependency": "cd:2"
+
+        }
+    },
+    "warnings" : {
+        
+    },
+    "all_events_happened": "No multiple entries are returned.",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
+            "2": "Crash!"
+        }
+
+    },
+    "interesting_pairs": { "1": ["2"], "2": ["3"] }
+}

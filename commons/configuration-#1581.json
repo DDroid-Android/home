@@ -1,0 +1,52 @@
+{
+    "app_name": "Commons",
+    "bug_id": "#1581",
+    "events": {
+        "1": {
+            "info": "Selected the \"Nearby\" option in the drawer.",
+            "reason": "Cannot open the drawer.",
+            "dependency": null
+        },
+        "2": {
+            "info": "Checked that GPS (location permission) is disabled.",
+            "reason": "The GPS is not disabled",
+            "dependency": null
+        },
+        "3": {
+            "info": "Selected \"ENABLE GPS\" in the GPS requirement dialog.\nThis happened when the GPS is disabled.",
+            "reason": "If this event shows ",
+            "dependency": "2"
+        },
+        "4": {
+            "info": "Selected \"OK\" in the another GPS requirement dialog.\nThis happened when the GPS is enabled but this app isn't granted with GPS permission.",
+            "reason": "The occurrence of this event means tester refused to give the location permission to\napp in the OS dialog.",
+            "dependency": null
+        }
+    },
+    "warnings" : {
+        "2": "Didn't turn to the location setting page.",
+        "3": "Selected the \"CANCEL\" in the GPS requirement dialog.\nThis happened when the GPS is disabled.",
+        "4": "Selected the \"CANCEL\" in the another GPS requirement dialog.\nThis happened when the GPS is enabled but this app isn't granted with GPS permission."
+    },
+    "all_events_happened": "This crash requires that it's the first time to get location permission from OS\nwith GPS disabled.",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
+            "2": "state_2",
+            "3": "state_3"
+        },
+        "state_3": {
+            "2": "state_2",
+            "3": "state_3",
+            "4": "Crash!"
+        }
+    },
+    "interesting_pairs": {"1": ["1", "2", "4"], "2": ["2", "3"], "3": ["1", "2", "3", "4"]}
+}

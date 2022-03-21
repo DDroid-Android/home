@@ -1,0 +1,30 @@
+{
+    "app_name": "GeoHashDroid",
+    "bug_id": "#73",
+    "events": {
+        "1": {
+            "info": "Clicked the \"GRATICULE\" at the bottom.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Checked the \"Globalhash!\" checkbox.",
+            "reason": null,
+            "dependency": "cd:1"
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": null,
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "Crash!"
+        }
+    },
+    "interesting_pairs": {"1": ["2"]}
+}

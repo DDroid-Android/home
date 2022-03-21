@@ -1,0 +1,30 @@
+{
+    "app_name": "AnkiDroid",
+    "bug_id": "#5638",
+    "events": {
+        "1": {
+            "info": "Input a string in the \"Front Template\" text editor.",
+            "reason": "Can't open fab.",
+            "dependency": null
+        },
+        "2": {
+            "info": "Input an invalid string in the \"Front Template\" text editor.",
+            "reason": null,
+            "dependency": "dd:1"
+        }
+    },
+    "warnings" : {
+
+    },
+    "all_events_happened": "Cannot input a invalid string like \"&bsol;\"",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "Crash!"
+        }
+    },
+    "interesting_pairs": {"1": ["2"]}
+}
