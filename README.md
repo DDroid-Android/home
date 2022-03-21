@@ -1,6 +1,6 @@
 # DDroid
 
-DDroid is a tool used to help find the clues for tool diagnosis on the bugs missed by automated GUI testing tools. 
+DDroid is a tool used to help find the clues for tool diagnosis on the bugs missed by automated GUI testing tools for Android.
 
 # 1. Contents of DDroid
 
@@ -88,7 +88,7 @@ Here,
 * `-a` is used to output the detailed coverage statistics in terms of event coverage, event-pair coverage and trace-based minimal distance
 
 
-Then, we will get an coverage report like this (this is one example report from `instrumented-FirefoxLite-#4881.apk` ran by FastBot):
+Then, we will get a coverage report like this (this is one example report from `instrumented-FirefoxLite-#4881.apk` ran by FastBot):
 
 ```
 [ Analyzer ] THE NFA FILE:
