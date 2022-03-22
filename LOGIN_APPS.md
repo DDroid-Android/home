@@ -89,9 +89,9 @@ $ bash -x copy_dummy_documents.sh emulator-5554
 ```
 
 ```
-$ adb -s emulator-5554 install -g ../WordPress/WordPress-vanilla-debug--#8659.apk
+$ adb -s emulator-5554 install -g ../WordPress/instrumented-WordPress-#10547.apk 
 
-$ python3 ../WordPress/login-#8659.py emulator-5554
+$ python3 ../WordPress/login-instrumented-#10547.py emulator-5554
 
 
 wait 1 second ..
@@ -204,9 +204,9 @@ wait 1 second ..
 org.wordpress.android
 org.wordpress.android.ui.accounts.LoginEpilogueActivity
 ****Login SUCCESS*****
-../WordPress/login-#8659.py:76: DeprecationWarning: Call to deprecated method service. (You should use d.uiautomator.start() instead) -- Deprecated since version 3.0.0.
+../WordPress/login-instrumented-#10547.py:76: DeprecationWarning: Call to deprecated method service. (You should use d.uiautomator.start() instead) -- Deprecated since version 3.0.0.
   d.service("uiautomator").stop()
-../WordPress/login-#8659.py:78: DeprecationWarning: Call to deprecated method service. (You should use d.uiautomator.start() instead) -- Deprecated since version 3.0.0.
+../WordPress/login-instrumented-#10547.py:78: DeprecationWarning: Call to deprecated method service. (You should use d.uiautomator.start() instead) -- Deprecated since version 3.0.0.
   out = d.service("uiautomator").running()
 DISCONNECT UIAUTOMATOR2 SUCCESS
 ```
@@ -220,7 +220,7 @@ $ adb -s emulator-5554 emu kill
 - Run a tool on this bug
 
 ```
-python3 themis.py --no-headless --avd Android7.1 --apk ../nextcloud/nextcloud-#5173.apk --time 10m -o ../monkey-results/ --login ../nextcloud/login-#5173.py --monkey --snapshot
+python3 themis.py --no-headless --avd Android7.1 --apk ../nextcloud/instrumented-nextcloud-#5173.apk  --time 10m -o ../monkey-results/ --login ../nextcloud/login-#5173.py --monkey --snapshot
 ```
 
 ```
@@ -230,8 +230,8 @@ Due to the account issue, Frost cannot be tested in all threee industrial tools.
 1. connection with google access
 
  commons/commons-2.11.0-#3244.apk                         success
- commons/commons-2.9.0-#2123.apk                        success
- commons/commons-2.6.7-#1391.apk     	                    success
+ commons/commons-2.9.0-#2123.apk                          success
+ commons/commons-2.6.7-#1391.apk     	                  success
  commons/commons-2.6.7-#1385.apk                          success   
  commons/commons-2.7.1-#1581.apk                          success
  Frost/Frost-debug-2.2.1-#1323.apk                        fail(account issue)
@@ -255,8 +255,8 @@ Due to the account issue, Frost cannot be tested in all threee industrial tools.
 2. connection without google access
 
  commons/commons-2.11.0-#3244.apk                         fail
- commons/commons-2.9.0-#2123.apk                        fail
- commons/commons-2.6.7-#1391.apk     	                    fail
+ commons/commons-2.9.0-#2123.apk                          fail
+ commons/commons-2.6.7-#1391.apk     	                  fail
  commons/commons-2.6.7-#1385.apk                          fail   
  commons/commons-2.7.1-#1581.apk                          fail
  Frost/Frost-debug-2.2.1-#1323.apk                        fail(account issue)
