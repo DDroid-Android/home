@@ -37,8 +37,7 @@ adb -s emulator-5554 emu kill
 The testing logic of login app is to use the feature of the read-only option of the emulators, and the --snapshot function ensures the test start with the loginned state
 The testing start with such paradigm:
 ```
-python3 themis.py --avd test1 --apk ../apk_location/apk_name -o ../test
-_results_location/ --time 6h --repeat 5 --wait 1 --tool_name --snapshot --offset n
+python3 themis.py --avd test1 --apk ../apk_location/apk_name -o ../test_results_location/ --time 6h --repeat 5 --wait 1 --tool_name --snapshot --login 0 --offset n
 ```
 
 
