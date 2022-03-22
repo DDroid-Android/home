@@ -66,6 +66,7 @@ Here,
 * `--time 6h` allocates 6 hours for the testing tool to find the bug 
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
+**Notes: for apps that require login, please make reference to [LOGIN_APPS.md](https://github.com/DDroid-Android/home/blob/main/LOGIN_APPS.md) 
 
 **Step 3. run the analysis script to analyze the effectiveness of Monkey**
 
@@ -86,33 +87,108 @@ python3 analyze_log.py -a ../monkey-results/
 
 Here, 
 * `-a` is used to output the detailed coverage statistics in terms of event coverage, event-pair coverage and trace-based minimal distance
+* Use `-d` option to print the detail information
 
-
-Then, we will get a coverage report like this (this is one example report from `instrumented-FirefoxLite-#4881.apk` ran by FastBot):
+Then, we will get a coverage report like this (this is one example report from `instrumented-ActivityDiary-#118.apk` ran by FastBot):
 
 ```
+[ Analyzer ] ARGUMENTS:
+    > Target directory: [/data/XXX-exp/fastbot-2Rounds_16-test_results-01-06/instrumented-ActivityDiary-#118.apk.fastbot.result.emulator-5562.n2#2022-01-16-01-22-12]
+    > Do count all pairs in DFA? [False]
+    > Do wait when matching? [False]    > Use the parent dir? [False]
 [ Analyzer ] THE NFA FILE:
-    > ../FirefoxLite/4881-NFA.jff
-[ Converter ] Executing  "java -jar ../tools/putflap.jar convert -t json ../FirefoxLite/4881-NFA.jff"
+    > ../ActivityDiary/118-NFA.jff
+[ Converter ] Executing  "java -jar ../tools/putflap.jar convert -t json ../ActivityDiary/118-NFA.jff"
 [ Converter ] Conversion succeeded!
 [ Converter ] Loading json succeeded.
 [ Analyzer ] THE LOG FILE:
-    > /data/XXX/fastbot-2Rounds_16-test_results-01-06/instrumented-FirefoxLite-#4881.apk.fastbot.result.emulator-5580.nologin2#2022-01-06-10-14-24/logcat.log
+    > /data/XXX-exp/fastbot-2Rounds_16-test_results-01-06/instrumented-ActivityDiary-#118.apk.fastbot.result.emulator-5562.n2#2022-01-16-01-22-12/logcat.log
 [ Analyzer ] THE TIME FILE:
-    > /data/XXX/fastbot-2Rounds_16-test_results-01-06/instrumented-FirefoxLite-#4881.apk.fastbot.result.emulator-5580.nologin2#2022-01-06-10-14-24/fastbot_testing_time_on_emulator.txt
-**********************************[ FireFoxLite-#4881 (fastbot) ]**********************************
+    > /data/XXX-exp/fastbot-2Rounds_16-test_results-01-06/instrumented-ActivityDiary-#118.apk.fastbot.result.emulator-5562.n2#2022-01-16-01-22-12/fastbot_testing_time_on_emulator.txt
+**********************************[ ActivityDairy-#118 (fastbot) ]**********************************
 ----------------------------------[ The statistics of each event ]----------------------------------
-          [ #4881 ] Event 1/3:  76-0  . (0:04:17/6:00:00)
-              > Event info: Clicked the shopping button on the left bottom.
-          [ #4881 ] Event 2/3:   7-0  . (0:22:00/6:00:00)
-              > Event info: Inputted a keyword and clicked the "Search" icon on the keyboard.
-          [ #4881 ] Event 3/3:   0-0  . (None/6:00:00)
-              > Event info: Entered the full screen mode of a playing video.
+          [ #118 ] Event 1/8: 458-0  . (0:00:09/6:00:00)
+              > Event info: Clicked an activity item on the main page.
+          [ #118 ] Event 2/8: 586-0  . (0:00:21/6:00:00)
+              > Event info: Clicked the button to take a picture.
+          [ #118 ] Event 3/8:   0-0  . (None/6:00:00)
+              > Event info: Got a picture.
+          [ #118 ] Event 4/8: 1735-0  . (0:00:09/6:00:00)
+              > Event info: Opened the drawer.
+          [ #118 ] Event 5/8:  78-0  . (0:00:26/6:00:00)
+              > Event info: Clicked the "Dairy" option in the drawer.
+          [ #118 ] Event 6/8:   0-0  . (None/6:00:00)
+              > Event info: Long clicked a picture of an activity entry.
+          [ #118 ] Event 7/8:   0-0  . (None/6:00:00)
+              > Event info: Deleted a picture of an activity entry.
+          [ #118 ] Event 8/8:   0-0  . (None/6:00:00)
+              > Event info: Deleted a picture when the first activity entry in the list does not have any picture.
+---------------------------------[ Analysis of the missing events ]---------------------------------
+          [ #118 ] Event 3
+              > The possible reason: None
+              > The previous related events: cd:2
+          [ #118 ] Event 6
+              > The possible reason: None
+              > The previous related events: cd:5
+          [ #118 ] Event 7
+              > The possible reason: None
+              > The previous related events: cd:6
+          [ #118 ] Event 8
+              > The possible reason: Deleted a picture when the first activity entry in the list does not have any picture.
+              > The previous related events: None
+-------------------------------- [ The count of interesting pairs ] --------------------------------
+          [ #118 ] (1, 1) :   69 times
+          [ #118 ] (1, 2) :  215 times
+          [ #118 ] (1, 3) :    0 times
+          [ #118 ] (1, 4) :  174 times
+          [ #118 ] (1, 5) :    0 times
+          [ #118 ] (2, 1) :   51 times
+          [ #118 ] (2, 2) :   78 times
+          [ #118 ] (2, 3) :    0 times
+          [ #118 ] (2, 4) :  457 times
+          [ #118 ] (2, 5) :    0 times
+          [ #118 ] (3, 1) :    0 times
+          [ #118 ] (3, 2) :    0 times
+          [ #118 ] (3, 3) :    0 times
+          [ #118 ] (3, 4) :    0 times
+          [ #118 ] (4, 1) :  312 times
+          [ #118 ] (4, 2) :  274 times
+          [ #118 ] (4, 3) :    0 times
+          [ #118 ] (4, 4) : 1070 times
+          [ #118 ] (4, 5) :   78 times
+          [ #118 ] (5, 1) :   25 times
+          [ #118 ] (5, 2) :   19 times
+          [ #118 ] (5, 3) :    0 times
+          [ #118 ] (5, 4) :   34 times
+          [ #118 ] (5, 5) :    0 times
+          [ #118 ] (5, 6) :    0 times
+          [ #118 ] (6, 1) :    0 times
+          [ #118 ] (6, 2) :    0 times
+          [ #118 ] (6, 3) :    0 times
+          [ #118 ] (6, 4) :    0 times
+          [ #118 ] (6, 6) :    0 times
+          [ #118 ] (6, 7) :    0 times
+          [ #118 ] (7, 1) :    0 times
+          [ #118 ] (7, 2) :    0 times
+          [ #118 ] (7, 4) :    0 times
+          [ #118 ] (7, 5) :    0 times
+          [ #118 ] (7, 8) :    0 times
+-------------------------[ The minimum distance to the crash when testing ]-------------------------
+          [ #118 ] Min distance 7/9 (586 times)
+          [ #118 ] Min distance 8/9 (2271 times)
+          [ #118 ] Min distance 9/9 (1 times)
 ----------------------------------------[ COVERAGE METRICS ]----------------------------------------
                     Event Coverage(%)     Event-Pair Coverage(%)    Min Distance
-          [ #4881 ]    2/3 (66.67%)             3/5 (60.00%)               1
+          [ #118 ]    4/8 (50.00%)            13/36(36.11%)               7
 ***************************************[ Analysis finished ]***************************************
 ```
 
-
+```
+[fastbot]
+    [ActivityDiary]
+        [#118] ['50.00% / 36.11% / 7 / False', '50.00% / 36.11% / 7 / False', '50.00% / 36.11% / 7 / False', '50.00% / 36.11% / 7 / False', '50.00% / 36.11% / 7 / False']
+        [#118-best] 50 & 36 & 7
+        [#285] ['33.33% / 15.79% / 3 / False', '33.33% / 15.79% / 3 / False', '50.00% / 26.32% / 2 / False', '33.33% / 15.79% / 3 / False', '33.33% / 15.79% / 3 / False']
+        [#285-best] 50 & 26 & 2
+```
 
