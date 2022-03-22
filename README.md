@@ -66,7 +66,7 @@ Here,
 * `--time 6h` allocates 6 hours for the testing tool to find the bug 
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
-**Notes: for apps that require login, please make reference to [LOGIN_APPS.md](https://github.com/DDroid-Android/home/blob/main/LOGIN_APPS.md) 
+* **Notes: for apps that require login, please make reference to [LOGIN_APPS.md](https://github.com/DDroid-Android/home/blob/main/LOGIN_APPS.md) 
 
 **Step 3. run the analysis script to analyze the effectiveness of Monkey**
 
@@ -182,7 +182,7 @@ Then, we will get a coverage report like this (this is one example report from `
           [ #118 ]    4/8 (50.00%)            13/36(36.11%)               7
 ***************************************[ Analysis finished ]***************************************
 ```
-
+We can also get a brief overview of the three metrics using DDroid.
 ```
 [fastbot]
     [ActivityDiary]
