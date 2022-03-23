@@ -66,7 +66,6 @@ Here,
 * `--time 6h` allocates 6 hours for the testing tool to find the bug 
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
-* **Notes: for apps that require login, please make reference to [LOGIN_APPS.md](https://github.com/DDroid-Android/home/blob/main/LOGIN_APPS.md) 
 
 **Step 3. run the analysis script to analyze the effectiveness of Monkey**
 
