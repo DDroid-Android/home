@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block jssrc required %}{% endblock jssrc %}
+    <style>
+        body { font-family: Consolas, Monaco, Andale Mono, monospace; }
+        a { text-decoration: none; }
+        a:hover { text-decoration: underline; color: limegreen; }
+        td { width: 220px; text-align: center; }
+        th { background: lightgrey }
+        footer { height: 50px }
+        .td_bug { width: 75px }
+        .crashed_item { color: green; display: grid; grid-template-columns: auto auto auto; padding-left: 15%; padding-right: 15%; }
+        .non_crashed_item { color: rgb(45, 41, 41); display: grid; grid-template-columns: auto auto auto; padding-left: 15%; padding-right: 15%; }
+    </style>
+    {% block style %}{% endblock style %}
+    <title>DDroid Summary</title>
+</head>
+<body>
+    <header>
+        <h1>{{ title }}</h1>
+        <p style="font-style: italic">Analyzed at {{ timestamp }}</p>
+        <p>{{ target }}</p>
+    </header>
+    {% block body required %}{% endblock body %}
+    <footer>
+
+    </footer>
+</body>
+{% block script required %}{% endblock script %}
+</html>

@@ -1,0 +1,47 @@
+{% extends "basetmpl.html" %}
+
+{% block jssrc %}
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+{% endblock jssrc %}
+
+{% block body %}
+    {%- for tool in summary.keys() -%}
+    <div id="{{ 'div_' ~ tool }}"><div class="header_tool"><h2>{{ tool }}</h2></div>
+        {%- for app in summary[tool].keys() -%}
+        <div id="{{ 'div_' ~ app }}"><div class="header_app"><h3>>{{ app }}</h3></div>
+            <table>
+                <tr><th>Bug ID</th><th>Run 1</th><th>Run 2</th><th>Run 3</th><th>Run 4</th><th>Run 5</th></tr>
+                {%- for bug in summary[tool][app].keys() -%}
+                <tr><td class="td_bug">{{ bug }}</td>
+                    {%- for result in summary[tool][app][bug] -%}
+                    <td><a href="{{ result[1] }}" class="{{ 'crashed_item' if result[0].has_crash else 'non_crashed_item' }}">
+                        {% if result[0].event_cov is float %}
+                        <div>{{ (result[0].event_cov * 100) | round | int }}%</div>
+                        {% else %}
+                        <div>None</div>
+                        {% endif %}
+
+                        {% if result[0].event_pair_cov is float %}
+                        <div>{{ (result[0].event_pair_cov * 100) | round | int }}%</div>
+                        {% else %}
+                        <div>None</div>
+                        {% endif %}
+
+                        <div>{{ "%d/%d" | format(result[0].minimal_distance.0, result[0].minimal_distance.1) }}</div>
+                    </a></td>
+                    {%- endfor -%}
+                </tr>
+                {%- endfor -%}
+            </table>
+        </div>
+        {%- endfor -%}
+    </div>
+    {%- endfor -%}
+{% endblock body %}
+
+{% block script %}
+<script>
+
+</script>
+{% endblock script %}

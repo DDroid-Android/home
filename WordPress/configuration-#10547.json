@@ -1,0 +1,42 @@
+{
+    "app_name": "WordPress",
+    "bug_id": "#10547",
+    "events": {
+        "1": {
+            "info": "Selected the \"Posts\" button on the main page.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Entered the post-editing page.",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Selected the \"Preview\" option in the option menu.", 
+            "reason": null,
+            "dependency": "cd:2"
+        }
+    },
+    "warnings": {},
+    "all_events_happened": "The \"Don't keep activities\" option is not enabled.",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
+            "2": "state_2",
+            "3": "state_3"
+        },
+        "state_3": {
+            "2": "Crash!"
+        }
+
+    },
+    "interesting_pairs": {"1": ["2"], "2": ["3"], "3":["2"]}
+}

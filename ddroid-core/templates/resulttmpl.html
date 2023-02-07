@@ -1,0 +1,105 @@
+{% extends "basetmpl.html" %}
+
+{% block jssrc %}
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+{% endblock jssrc %}
+
+{% block style  %}
+    <style>
+        #grid_coverage {
+            display: grid;
+            grid-template-columns: auto auto auto;
+        }
+    </style>
+{% endblock style  %}
+
+{% block body %}
+    <h2>Overall Metrics</h2>
+    <div id="grid_coverage">
+        <div id="chart_event_coverage" style="width: 300px;height: 300px"></div>
+        <div id="chart_event_pair_coverage" style="width: 300px;height: 300px"></div>
+        <div id="chart_distances" style="width: 500px;height: 300px"></div>
+    </div>
+    <div id="block_events">
+        <h2>Event Details</h2>
+        {% for event in events -%}
+            <p><strong>Event {{ event.id() }}</strong> - {{ event.description() }}</p>
+        {%- endfor %}
+        <div id="chart_events" style="width: 600px;height: 400px"></div>
+    </div>
+{% endblock body %}
+
+{% block script %}
+<script>
+    const chartEvents = echarts.init(document.getElementById("chart_events"));
+    const chartEventsOption = {
+        title: { text: 'Event Statistics' },
+        tooltip: { trigger: 'axis', axisPointer: { type: "shadow" } },
+        legend: { right: 50, selectedMode: false },
+        xAxis: { type: "category", data: [{%- for event in events -%} {{ event.id() }}{{","}} {%- endfor -%}] },
+        yAxis: [
+            { type: "value", name: "Number of triggers", nameLocation: "center", nameGap: 30 },
+            { type: "value", name: "Elapsed time/s", nameLocation: "center", nameGap: 50, min: 0 }
+        ],
+        series: [
+            { name: "Executed times", type: "bar", data: [{%- for event in events -%} {{ event.count() }}{{","}} {%- endfor -%}], emphasis: { focus: 'series' } },
+            // { name: "Warnings", type: "bar", data: [{%- for event in events -%} {{ event.warning_count() }}{{","}} {%- endfor -%}], emphasis: { focus: 'series' } },
+            { name: "Time of first execution", type: "scatter", data: [{%- for event in events -%} {{ event.first_trigger_seconds() }}{{","}} {%- endfor -%}], emphasis: { focus: 'series' }, yAxisIndex: 1 },
+            // { name: "WFTT", type: "line", data: [{%- for event in events -%} {{ event.first_trigger_warning_seconds() }}{{","}} {%- endfor -%}], emphasis: { focus: 'series' }, yAxisIndex: 1 },
+        ]
+    };
+    chartEvents.setOption(chartEventsOption);
+</script>
+<script>
+    function getCoverageData(coverage) {
+        return [
+            { name: "Covered events", itemStyle: {color: "green"}, value: coverage[0] },
+            { name: "Missed events", itemStyle: {color: "lightgrey"}, value: coverage[1] }
+        ]
+    }
+</script>
+<script>
+    const chartEventCoverage = echarts.init(document.getElementById("chart_event_coverage"));
+    const chartEPOption = {
+        title: { text: "Event Coverage"},
+        series: [{
+            type: 'pie', radius: ['35%', '60%'],
+            avoidLabelOverlap: false,
+            itemStyle: { borderRadius: 10, borderColor: '#fff', borderWidth: 2 },
+            label: { show: false, position: 'center', formatter: "{c} {b} ({d}%)"  },
+            emphasis: { label: { show: true, fontSize: '20'} },
+            labelLine: { show: false },
+            data: getCoverageData({{ event_coverage }})
+        }]
+    }
+    chartEventCoverage.setOption(chartEPOption);
+</script>
+<script>
+    const chartEventPairsCoverage = echarts.init(document.getElementById("chart_event_pair_coverage"));
+    const chartEPCOption = {
+        title: { text: "Event Pair Coverage"},
+        series: [{
+            type: 'pie', radius: ['35%', '60%'],
+            avoidLabelOverlap: false,
+            itemStyle: { borderRadius: 10, borderColor: '#fff', borderWidth: 2 },
+            label: { show: false, position: 'center', formatter: "{c} {b} ({d}%)"  },
+            emphasis: { label: { show: true, fontSize: '20'} },
+            labelLine: { show: false },
+            data: getCoverageData({{ event_pair_coverage }})
+        }]
+    }
+    chartEventPairsCoverage.setOption(chartEPCOption)
+</script>
+<script>
+    const chartDistances = echarts.init(document.getElementById("chart_distances"));
+    const chartDistancesOption = {
+      title: { text: 'Distance Statistics' },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, formatter: "{c} times at distance {b}" },
+      xAxis: { type: 'value', name: "Number of arrivals", nameLocation: "center", nameTextStyle: {padding: 10} },
+      yAxis: { type: 'category', name: "Reached distance", nameLocation: "center", nameGap: 25, data: {{ distances.reached_distances() }} },
+      series: [{ type: 'bar', data: {{ distances.reached_distances_count() }}, itemStyle: { color: "green" } }]
+    };
+    chartDistances.setOption(chartDistancesOption);
+</script>
+{% endblock script %}

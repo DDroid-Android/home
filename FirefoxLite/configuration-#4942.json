@@ -1,0 +1,52 @@
+{
+    "app_name": "FireFoxLite",
+    "bug_id": "#4942",
+    "events": {
+        "1": {
+            "info": "Entered the web page by (1) clicking any site button in the main page, (2) clicking one website in the tab tray, or (3) searching in the main page.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Returned back to the launcher.",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Went back to FireFoxLite.",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Clicked the tab tray.",
+            "reason": null,
+            "dependency": "cd:1"
+        }
+    },
+    "warnings": {},
+    "all_events_happened": "The \"Don't keep activity\" option is not enabled.",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1",
+            "2": "state_0",
+            "3": "state_0"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2",
+            "3": "state_1",
+            "4": "state_1"
+        },
+        "state_2": {
+            "1":"state_1",
+            "3": "state_3"
+        },
+        "state_3": {
+            "4": "Crash!",
+            "1": "state_1",
+            "2":"state_2",
+            "3": "state_0"
+        }
+    },
+    "interesting_pairs": {"1": ["2","3","4"], "2": ["1","3"], "3": ["1","2","4"],"4":["2"]}
+}

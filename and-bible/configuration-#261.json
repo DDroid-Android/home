@@ -1,0 +1,115 @@
+{
+    "app_name": "AndBible",
+    "bug_id": "#261",
+    "events": {
+        "1": {
+            "info": "Clicked \"OK\" in the \"Download a Bible from the Internet\" dialog when startup.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked \"OK\" to download a bible.",
+            "reason": null,
+            "dependency": "cd:1"
+        },
+        "3": {
+            "info": "Clicked \"OK\" to download a book.",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Opened the drawer and clicked the \"Choose Document\" option.",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Selected a downloaded book in the \"Choose Document\" view.",
+            "reason": null,
+            "dependency": "cd:4"
+        },
+        "6": {
+            "info": "Chose a chapter of a downloaded book.",
+            "reason": null,
+            "dependency": "cd:5"
+        },
+        "7": {
+            "info": "Opened the drawer and clicked the \"Find\" option.",
+            "reason": null,
+            "dependency": null
+        },
+        "8": {
+            "info": "Clicked \"CREATE\" in the \"Search Index\" page.",
+            "reason": null,
+            "dependency": "cd:7"
+        },
+        "9": {
+            "info": "Selected other downloaded document (not a book) in the \"Choose Document\" view",
+            "reason": null,
+            "dependency": "cd:4"
+        }
+    },
+    "warnings": {
+        "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
+        "2": "Clicked \"CANCEL\" to give up downloading a bible.",
+        "3": "Clicked \"CANCEL\" to give up downloading a book."
+    },
+    "all_events_happened": null,
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "3": "state_3",
+            "2": "state_2"
+        },
+        "state_2": {
+            "2": "state_2",
+            "3": "state_4"
+        },
+        "state_3": {
+            "2": "state_4",
+            "3": "state_3"
+        },
+        "state_4": {
+            "2": "state_4",
+            "3": "state_4",
+            "4": "state_5"
+        },
+        "state_5": {
+            "2": "state_4",
+            "3": "state_4",
+            "5": "state_6",
+            "9": "state_5"
+        },
+        "state_6": {
+            "2": "state_6",
+            "3": "state_6",
+            "4": "state_10",
+            "6": "state_7",
+            "9": "state_5"
+        },
+        "state_7": {
+            "2": "state_7",
+            "3": "state_7",
+            "4": "state_10",
+            "7": "state_8"
+        },
+        "state_8": {
+            "2": "state_7",
+            "3": "state_7",
+            "4": "state_10",
+            "7": "state_8",
+            "8": "Crash!"
+        },
+        "state_10": {
+            "2": "state_10",
+            "3": "state_10",
+            "4": "state_10",
+            "5": "state_6",
+            "7": "state_8",
+            "9": "state_5"
+        }
+    },
+    "interesting_pairs": {"1":["3", "2"], "2":["2","3","4"], "3":["2","3","4"], "4": ["5","7","9"], "5": ["4","6"], "6": ["2","3","7"], "7": ["8"],"9":["5"] }
+}

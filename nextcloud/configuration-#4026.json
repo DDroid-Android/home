@@ -1,0 +1,30 @@
+{
+    "app_name": "NextCloud",
+    "bug_id": "#4026",
+    "events": {
+        "1": {
+            "info": "Opened the app NextCloud",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Returned back to the launcher and reopened NextCloud again.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": "The \"Don't keep activities\" option is not enabled.",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "Crash!"
+        }
+    },
+    "interesting_pairs": {"1": ["2"]}
+}
