@@ -178,7 +178,7 @@ Then the three metrics (event coverage, event-pair coverage and minimal distance
 **Details**
 
 Next is the details of event executions and the minimal distance. 
-- At the top of the figure below, event execution times are shown next to the event ID and the *black vertical line* implies the minimal distance to the crash state (i.e., the testing tool needs to follow the minimal bug-triggering trace to execute $E_3$, $E_4$ and $E_5$ to trigger the bug). 
+- At the top of the figure below, event execution times are shown next to the event ID and the *black vertical line* implies the minimal distance to the crash state (i.e., the testing tool needs to follow the minimal bug-triggering trace to execute $E_3$, $E_4$ and $E_5$ to trigger the bug). From this figure, executed events $E_1$ (executed 77 times), $E_2$ (executed 96 times), $E_3$ (executed 10 times), $E_4$ (executed 3 times) and missed event $E_5$ are shown.
 
 <div align="center">
     <img src="./figures/event-details.png" width="90%"/>
