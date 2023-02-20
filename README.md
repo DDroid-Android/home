@@ -157,7 +157,6 @@ We can inspect the clues in a HTML report (which can be viewed on a browser) by 
 python3 main.py ../monkey-results/instrumented-Scarlet-Notes-#114.apk.monkey.result -v
 ```
 
----
 
 **Bug-Triggering Trace**
 
@@ -170,13 +169,13 @@ The figure below gives the minimal bug-triggering trace of `ScarletNote-#114`. T
 
 **Themis+'s Clues**
 
-The figure below gives the three coverage metrics (event coverage, event-pair coverage and trace-based minimal distance). 
+The figure below gives the three coverage-based clues.
 
 - *Event coverage* (EC) computes how many events are covered or missed. In this case of `ScarletNote-#114`, its EC is `80%`.
 
 - *Event-Pair Coverage* (EPC) computes how many event pairs are covered or missed. In this case of `ScarletNote-#114`, its EPC is `38.1%`.
 
-- *Trace-based minimal distance* computes how close a testing tool can reach a bug. It uses the number of pivot events to characterize the distance. Here, *Distance Statistics* computes all the reached distances between any reached state and the final state (i.e., the crashing state).  The distances are sorted from the largest to the smallest. In this case of `ScarletNote-#114`, the minimal distance is `3`. The number of arrivals (reached times) of the `3`-minimal distance is over `150`.
+- *Trace-based minimal distance* (MD) computes how close a testing tool can reach a bug. It uses the number of pivot events to characterize the distance. Here, *Distance Statistics* computes all the reached distances between any reached state and the final state (i.e., the crashing state).  The distances are sorted from the largest to the smallest. In this case of `ScarletNote-#114`, the minimal distance is `3`. The number of arrivals (reached times) of the `3`-minimal distance is over `150`.
 
 <div align="center">
     <img src="./figures/themis-plus-clues.png" width="90%"/>
@@ -186,13 +185,13 @@ The figure below gives the three coverage metrics (event coverage, event-pair co
 
 The figure below gives the execution times of pivot events and the minimal distance. 
 - The execution times of pivot events is given next to the event ID. Specifically, `Event 1 (77 times)` indicates that $E_1$ was executed `77` times;  `Event 2 (96 times)` indicates that $E_2$ was executed `96` times; `Event 3 (10 times)` indicates that $E_3$ was executed `10` times; `Event 4 (3 times)` indicates that $E_4$ was executed `3` times; `Event 5 (0 times)` indicates that $E_5$ was executed `0` times. 
-- The *black vertical line* denotes that the minimal distance is `3`. It indicates that Fastbot can only execute <$E_1$, $E_2$>.
+- The *black vertical line* denotes that the minimal distance is `3`. It indicates that Fastbot can only execute the event sequence < $E_1$, $E_2$ > in order.
 
 <div align="center">
     <img src="./figures/event-details.png" width="90%"/>
 </div>
 
-The figure below gives the detailed execution statistics of pivot events. The left axis gives the execution times of pivot events (`Execution times`, in the column graph), and the right axis gives the time when each pivot event was executed at the first time (`Time of first execution`, in the dotted graph).
+The figure below gives the detailed execution statistics of pivot events. The left axis gives the execution times of pivot events (`Execution times`, in the blue column graph), and the right axis gives the elapsed time when each pivot event was executed at the first time (`Time of first execution`, in the green dotted graph).
 
 <div align="center">
     <img src="./figures/event-statistics.png" width="60%"/>
@@ -200,7 +199,7 @@ The figure below gives the detailed execution statistics of pivot events. The le
 
 **Batch Analysis**
 
-If the option `-b` (`--batch`) is enabled, the analysis summary file generated looks like the following figure. The green entry means that the testing tool triggers the bug in the corresponding run. Each entry shows the event coverage, event pair coverage and minimal distance succintly.
+The figure below gives the summary report when the option `-b` (`--batch`) is given. The green entry means that the testing tool *triggered* the bug in the corresponding run. Each entry gives `event coverage`, `event-pair coverage` and `trace-based minimal distance`. The black entry means the testing tool *missed* the bug in the corresponding run.
 
 <div align="center">
     <img src="./figures/summary.png" width="100%"/>
