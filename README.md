@@ -152,16 +152,16 @@ We can also get a brief overview of the three metrics using Themis+.
 
 ### **HTML Report**
 
-With option `-v`, we can inspect the clues in HTML format (which can be viewed on a browser). 
+We can inspect the clues in a HTML report (which can be viewed on a browser) by the option `-v` (see an example report below)
 ```
 python3 main.py ../monkey-results/instrumented-Scarlet-Notes-#114.apk.monkey.result -v
 ```
 
-***********
+---
 
 **Bug-Triggering Trace**
 
-The minimal bug-triggering trace of `ScarletNote-#114`. The pivot events are highlighted by the red boxes.
+The figure below gives the minimal bug-triggering trace of `ScarletNote-#114`. The pivot events are highlighted by the red boxes.
 
 <div align="center">
     <img src="./figures/bug-triggering-trace.png" width="90%"/>
@@ -170,26 +170,29 @@ The minimal bug-triggering trace of `ScarletNote-#114`. The pivot events are hig
 
 **Themis+'s Clues**
 
-The three metrics (event coverage, event-pair coverage and minimal distance) are visualied. 
-- *Event coverage* shows how many events and event pairs are covered or missed.
-- *Event Pair Coverage* shows how many event pairs are covered or missed.
-- *Distance Statistics* shows the distances experienced when running the tool. The distances here are all shortest distances between one states and the final state (i.e., the crash state).  And the distances are sorted from largest to smallest. For example, the minimal distance in the figure below is `3`.
+The figure below gives the three coverage metrics (event coverage, event-pair coverage and trace-based minimal distance). 
+
+- *Event coverage* (EC) computes how many events are covered or missed. In this case of `ScarletNote-#114`, its EC is `80%`.
+
+- *Event-Pair Coverage* (EPC) computes how many event pairs are covered or missed. In this case of `ScarletNote-#114`, its EPC is `38.1%`.
+
+- *Trace-based minimal distance* computes how close a testing tool can reach a bug. It uses the number of pivot events to characterize the distance. Here, *Distance Statistics* computes all the reached distances between any reached state and the final state (i.e., the crashing state).  The distances are sorted from the largest to the smallest. In this case of `ScarletNote-#114`, the minimal distance is `3`. The number of arrivals (reached times) of the `3`-minimal distance is over `150`.
 
 <div align="center">
     <img src="./figures/themis-plus-clues.png" width="90%"/>
 </div>
 
-**Details**
+**Details of Clues**
 
-Next is the details of event executions and the minimal distance. 
-- At the top of the figure below, event execution times are shown next to the event ID and the *black vertical line* implies the minimal distance to the crash state (i.e., the testing tool needs to follow the minimal bug-triggering trace to execute $E_3$, $E_4$ and $E_5$ to trigger the bug). From this figure, executed events $E_1$ (executed 77 times), $E_2$ (executed 96 times), $E_3$ (executed 10 times), $E_4$ (executed 3 times) and missed event $E_5$ are shown.
+The figure below gives the execution times of pivot events and the minimal distance. 
+- The execution times of pivot events is given next to the event ID. Specifically, `Event 1 (77 times)` indicates that $E_1$ was executed `77` times;  `Event 2 (96 times)` indicates that $E_2$ was executed `96` times; `Event 3 (10 times)` indicates that $E_3$ was executed `10` times; `Event 4 (3 times)` indicates that $E_4$ was executed `3` times; `Event 5 (0 times)` indicates that $E_5$ was executed `0` times. 
+- The *black vertical line* denotes that the minimal distance is `3`. It indicates that Fastbot can only execute <$E_1$, $E_2$>.
 
 <div align="center">
     <img src="./figures/event-details.png" width="90%"/>
 </div>
 
-- At the bottom is the event statistics. 
-This chart visualizes the event execution times and the time of first execution of each pivot event, showing the difference in aforementioned two aspects between the different events.
+The figure below gives the detailed execution statistics of pivot events. The left axis gives the execution times of pivot events (`Execution times`, in the column graph), and the right axis gives the time when each pivot event was executed at the first time (`Time of first execution`, in the dotted graph).
 
 <div align="center">
     <img src="./figures/event-statistics.png" width="60%"/>
