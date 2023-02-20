@@ -197,9 +197,15 @@ The figure below gives the detailed execution statistics of pivot events. The le
     <img src="./figures/event-statistics.png" width="60%"/>
 </div>
 
-**Batch Analysis**
+
+## 4. Batch Analysis
 
 The figure below gives the summary report when the option `-b` (`--batch`) is given. The green entry means that the testing tool *triggered* the bug in the corresponding run. Each entry gives `event coverage`, `event-pair coverage` and `trace-based minimal distance`. The black entry means the testing tool *missed* the bug in the corresponding run.
+
+```
+python3 main.py ../monkey-results/instrumented-Scarlet-Notes-#114.apk.monkey.result -b
+```
+
 
 <div align="center">
     <img src="./figures/summary.png" width="100%"/>
